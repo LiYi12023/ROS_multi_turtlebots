@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="robot_name"/>
+    <arg name="init_pose"/>
+
+    <arg name="base"/>
+    <arg name="stacks"/>
+    <arg name="3d_sensor"/>
+
+    <include file="$(find turtlebot_gazebo)/launch/includes/$(arg base)_walls.launch.xml">
+      <arg name="base" value="$(arg base)"/>
+      <arg name="stacks" value="$(arg stacks)"/>
+      <arg name="3d_sensor" value="$(arg 3d_sensor)"/>
+      <arg name="init_pose" value="$(arg init_pose)"/>
+      <arg name="robot_name" value="$(arg robot_name)"/>
+    </include>
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+     <param name="publish_frequency" type="double" value="30.0" />
+    </node>
+
+    <!-- The odometry estimator, throttling, fake laser etc. go here -->
+    <!-- All the stuff as from usual robot launch file -->
+</launch>
